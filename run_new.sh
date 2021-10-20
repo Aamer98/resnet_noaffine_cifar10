@@ -5,13 +5,13 @@
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-type=REQUEUE
 #SBATCH --mail-type=ALL
-#SBATCH --job-name=noaffine_cifar.sh
+#SBATCH --job-name=noaffine_cifar_new.sh
 #SBATCH --output=%x-%j.out
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:1
 #SBATCH --ntasks-per-node=32
 #SBATCH --mem=127000M
-#SBATCH --time=2-00:00
+#SBATCH --time=0-06:00
 #SBATCH --account=rrg-ebrahimi
 
 
@@ -38,8 +38,8 @@ cd resnet_noaffine_cifar10
 
 for model in resnet20 
 do
-    echo "python -u trainer.py  --arch=$model  --save-dir=save_$model |& tee -a log_$model"
-    python -u trainer.py  --arch=$model  --save-dir=save_$model |& tee -a log_$model
+    echo "python -u trainer_new.py  --arch=$model  --save-dir=save_$model |& tee -a log_$model"
+    python -u trainer_new.py  --arch=$model  --save-dir=save_$model |& tee -a log_$model
 done
 
 
