@@ -169,9 +169,9 @@ def main():
         save_checkpoint({
             'state_dict': model.state_dict(),
             'best_prec1': best_prec1,
-        }, is_best, filename=os.path.join(args.save_dir, 'model.th'))
+        }, is_best, filename=os.path.join(args.save_dir, '{}_model.th'.format(args.epochs)))
     
-    with open('train_stats.pickle', 'wb') as f:
+    with open('{}_train_stats.pickle'.format(args.epochs), 'wb') as f:
         pickle.dump([train_loss, train_acc, val_loss, val_acc, args.epochs], f)
 
 
@@ -239,10 +239,10 @@ def train(train_loader, model, criterion, optimizer, epoch):
                       epoch, i, len(train_loader), batch_time=batch_time,
                       data_time=data_time, loss=losses, top1=top1))
 
-    accuracy = 100 * correct / total
+    accu = 100 * correct / total
     fin_loss = tot_loss / len(train_loader)
 
-    return(accuracy, fin_loss)
+    return(accu, fin_loss)
 
 def validate(val_loader, model, criterion):
     """
@@ -300,15 +300,15 @@ def validate(val_loader, model, criterion):
                           i, len(val_loader), batch_time=batch_time, loss=losses,
                           top1=top1))
 
-    accuracy = 100 * correct / total
+    accu = 100 * correct / total
     fin_loss = tot_loss / len(val_loader)
     
     print(' * Prec@1 {top1.avg:.3f}'
           .format(top1=top1))
 
-    return top1.avg, accuracy, fin_loss
+    return top1.avg, accu, fin_loss
 
-def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
+def save_checkpoint(state, is_best, filename='{}_checkpoint.pth.tar'.format(args.epochs)):
     """
     Save the training model
     """

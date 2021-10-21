@@ -53,6 +53,7 @@ echo "----------------------------------<Copying files to Scratch>--------------
 
 date +"%T"\
 
-cp -r ./resnet_noaffine_cifar10 ~/scratch
+cp -r resnet_noaffine_cifar10 ~
+cp -r resnet_noaffine_cifar10 ~/scratch
 
 date +"%T"\
