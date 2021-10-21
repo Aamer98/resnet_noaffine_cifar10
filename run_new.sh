@@ -47,13 +47,14 @@ echo "---------------------------------------<End of program>-------------------
 
 date +"%T"\
 
-cd ..
+cd $SLURM_TMPDIR
 
-echo "----------------------------------<Copying files to Scratch>--------------------------------"
+
 
 date +"%T"\
-
-cp -r resnet_noaffine_cifar10 ~
-cp -r resnet_noaffine_cifar10 ~/scratch
+echo "----------------------------------<Copying files to root>--------------------------------"
+cp -r $SLURM_TMPDIR/resnet_noaffine_cifar10 ~
+echo "----------------------------------<Copying files to Scratch>--------------------------------"
+cp -r $SLURM_TMPDIR/resnet_noaffine_cifar10 ~/scratch/
 
 date +"%T"\
